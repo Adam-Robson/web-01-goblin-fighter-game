@@ -23,12 +23,12 @@
     <main>
         <section class="game-stats">
             <div class="cleaned-dusts">
-                <p>You have cleaned <span id="cleaned-number">0</span>dusts</p>
+                <p>You have cleaned <span id="cleaned-number">0 </span>dusts</p>
                     <div id="cleaned-list">
 
                     </div>
             </div>
-            <div class="player">
+            <div id = "player" class="player">
                 <p>Player power: 
                     <span id="player-power">10</span>
                 </p>
@@ -37,12 +37,8 @@
             </div>
         </section>
             <div class="dust-stats">
-        <section id="form-section">
-            <form id="create-form"> 
                 <input type="text" id="name-input">
                 <button id="button">make more dust</button>
-            </form>
-        </section>
         <section class="dusts">
             <div id="dust-list">
 
@@ -51,8 +47,8 @@
             </div>
         </section>
     </main>
-    <script type="module" src="app.js"></script>
-    <script type="module" src="render-utils.js"></script>
+    <script type="module" src="./app.js"></script>
+    <script type="module" src="./render-utils.js"></script>
 </body>
 
 </html>

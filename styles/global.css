@@ -1,5 +1,5 @@
 :root {
-    --background: rgb(224, 234, 247);
+    --background: rgb(253, 253, 253);
     --header-background: white;
     --footer-background: rgb(243, 242, 242);
 }
@@ -33,3 +33,23 @@ footer {
     justify-content: flex-end;
     background-color: var(--footer-background);
 }
+
+.game-over {
+    transform: rotate(90deg);
+}
+
+.dust {
+    border: 5px solid darkblue;
+    height: 130px;
+    width: 150px;
+    margin: 5px;
+    background-color:turquoise;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+
+      }
+
+      #button {
+        justify-content: center;
+      }
