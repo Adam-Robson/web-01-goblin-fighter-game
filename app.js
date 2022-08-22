@@ -1,69 +1,68 @@
+import { renderDust } from 'render-utils.js';
 
-const nameInput = document.getElementById('name-input');
-const gameContainer = document.getElementById('game-container');
-const playerSection = document.getElementById('player-section');
-const dustContainer = document.getElementById('dust-container');
-const dustSection = document.getElementById('dust-section');
-const activeDust = document.getElementById('active-dust');
-const otherDusts = document.getElementById('other-dusts');
-const button = document.getElementById('button');
-const playerStats = document.createElement('player-stats');
-const playerStatus = document.createElement('player-status');
+const cleanedNumberEl = document.getElementById('cleaned-number');
+const playerPower = document.getElementById('player-power');
+const playerImage = document.getElementById('player-image');
+const createForm = document.getElementById('create-form');
+const dustListEl = document.getElementById('dust-list');
 
-let playerPower = 10;
-let cleanedDusts = 0; 
-let dustsArray = [
-    { name: 'si', power: 7 },
+let cleanedDustsCount = 0;
+let playerPowerCount = 10;
+let dustCount = [
     { name: 'kiki', power: 7 },
+    { name: 'si', power: 10 },
 ];
 
-button.addEventListener('click', () => {
- 
-    const newName = nameInput.value;
-    activeDust.textContent = newName;
+createForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const data = new FormData(createForm);
+
+    const dustName = data.get('name-input');
+
     const newDust = {
-        name: newName,
-        power: Math.ceil(Math.random() * 7),
+        name: dustName,
+        power: Math.ceil(Math.random() * 5),
     };
-    dustsArray.push(newDust);
-    nameInput.value = '';
-    displayAll();
+    dustCount.push(newDust);
+
+    displayDust();
 });
 
-function displayAll() {
-    otherDusts.textContent = '';
-    for (let dust of dustsArray) {
-        const dustEl = document.createElement('div');
-        dustEl.textContent = `${dust.name} ${dust.power}`;
-        dustEl.classList.add('dust');
+function displayDust() {
+    dustListEl.textContent = '';
 
-        dustEl.addEventListener('click', () => {
-            if (dust.power > 0 && playerPower > 0) {
-                if (Math.random() > .5) {
+    for (let dust of dustCount) {
+        const dustEl = renderDust(dust);
+        if (dust.power > 0) {
+            dust.addEventListener('click', () => {
+                if (Math.random() < .33) {
                     dust.power--;
-                    dustSection.textContent = dust.name + 'has been cleaned on!';
-                    dustContainer.textContent = dust.power;
+                    alert('You hit ' + dust.name);
+                } else {
+                    alert('you ried to hit ' + dust.name + ' and missed!');
                 }
-                if (Math.random() > .7) {
-                    playerPower--;
-                    playerSection.textContent = 'You are getting dusted!';
-                    playerStats.textContent = `Power: ${playerPower}`;
+                if (Math.random() < .5) {
+                    playerPowerCount--;
+                    alert(dust.name + ' hit you!');
+                } else {
+                    alert(dust.name + ' tried to hit you and missed!');
                 }
                 if (dust.power === 0) {
-                    cleanedDusts++;
-                    gameContainer.textContent = `${dust.name} has been cleaned up! you have cleaned up ${cleanedDusts} dusts!`;
+                    cleanedDustsCount++;
                 }
-                if (playerPower <= 0) {
-                    playerStatus.textContent = `You were completely dusted! You are now the dust!`;
-                    playerStats.textContent = `Power: ${playerPower}`;
+                if (playerPowerCount === 0) {
+                    playerImage.classList.add('game-over');
+                    alert('GAME-OVER');
                 }
-                playerStats.textContent = playerPower;
-                if (dustsArray.length === cleanedDusts) {
-                    playerStatus.textContent = `You cleaned up all of the dust!`;
-                }
-                displayAll(); 
-            }
-        });
-        activeDust.append(dustEl);
+                playerPower.textContent = playerPowerCount;
+                cleanedNumberEl.textContent = cleanedDustsCount;
+
+                displayDust();
+            });
+
+        }
+        dustListEl.append(dustEl);
     } 
 }
+
+displayDust();
