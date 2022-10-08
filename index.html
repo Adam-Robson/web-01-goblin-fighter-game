@@ -12,22 +12,43 @@
         href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;600&family=Titillium+Web:wght@200;400;600&display=swap">
     <link rel="stylesheet" href="/styles/reset.css" />
     <link rel="stylesheet" href="/styles/global.css" />
-    <title>Web App</title>
+    <title>player two</title>
 </head>
 
 <body>
     <header>
         <img src="/assets/html_css_js.png">
-        <h1>Web App</h1>
+        <h1>player two</h1>
     </header>
-
     <main>
+        <section class="game-stats">
+            <div class="cleaned-dusts">
+                <p>You have cleaned <span id="cleaned-number">0 </span>dusts</p>
+                    <div id="cleaned-list">
 
+                    </div>
+            </div>
+            <div id = "player" class="player">
+                <p>Player power: 
+                    <span id="player-power">10</span>
+                </p>
+                <img id="player-image" src="assets/dust-player.png" alt="player image">
+
+            </div>
+        </section>
+            <div class="dust-stats">
+                <input type="text" id="name-input">
+                <button id="button">make more dust</button>
+        <section class="dusts">
+            <div id="dust-list">
+
+
+            </div>    
+            </div>
+        </section>
     </main>
-
-    <footer>&copy;2022 Software Developer</footer>
-
-    <script type="module" src="app.js"></script>
+    <script type="module" src="./app.js"></script>
+    <script type="module" src="./render-utils.js"></script>
 </body>
 
 </html>
